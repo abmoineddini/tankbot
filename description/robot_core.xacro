@@ -36,7 +36,7 @@
         <visual>
             <origin xyz="0.10125 0 0.010"/>
             <geometry>
-                <mesh filename="package://tankbot/meshes/chassis.STL"/>
+                <mesh filename="package://tankbot/meshes/chassis.stl"/>
             </geometry>
             <material name="brown"/>
         </visual>
@@ -52,6 +52,10 @@
         </inertial>
     </link>
 
+    <gazebo reference="chassis">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
     <joint name="left_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel"/>
@@ -62,7 +66,7 @@
     <link name="left_wheel">
         <visual>
             <geometry>
-                <mesh filename="package://tankbot/meshes/left_wheel_link.STL"/>
+                <mesh filename="package://tankbot/meshes/left_wheel_link.stl"/>
             </geometry>
             <material name="white"/>
         </visual>
@@ -75,6 +79,10 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
+    <gazebo reference="left_wheel">
+        <material>Gazebo/White</material>
+    </gazebo>
+
 
     <joint name="right_wheel_joint" type="continuous">
         <parent link="base_link"/>
@@ -86,7 +94,7 @@
     <link name="right_wheel">
         <visual>
             <geometry>
-                <mesh filename="package://tankbot/meshes/right_wheel_link.STL"/>
+                <mesh filename="package://tankbot/meshes/right_wheel_link.stl"/>
             </geometry>
             <material name="white"/>
         </visual>
@@ -99,6 +107,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
+    <gazebo reference="right_wheel">
+        <material>Gazebo/White</material>
+    </gazebo>
 
     <joint name="caster_wheel_joint" type="fixed">
         <parent link="chassis"/>
@@ -122,6 +133,11 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_sphere>
     </link>
+    <gazebo reference="caster_wheel">
+        <material>Gazebo/Black</material>
+        <mu1 value="0.0001"/>
+        <mu2 value="0.0001"/>
+    </gazebo>
 
         <joint name="caster_wheel_back_left_joint" type="fixed">
         <parent link="chassis"/>
@@ -145,6 +161,11 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_sphere>
     </link>
+    <gazebo reference="caster_wheel_back_left">
+        <material>Gazebo/Black</material>
+        <mu1 value="0.0001"/>
+        <mu2 value="0.0001"/>
+    </gazebo>
 
 
     <joint name="caster_wheel_back_right_joint" type="fixed">
@@ -170,5 +191,10 @@
         </xacro:inertial_sphere>
     </link>
 
+   <gazebo reference="caster_wheel_back_right">
+        <material>Gazebo/Black</material>
+        <mu1 value="0.0001"/>
+        <mu2 value="0.0001"/>
+    </gazebo>
 
 </robot>
