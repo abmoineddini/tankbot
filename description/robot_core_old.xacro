@@ -34,14 +34,14 @@
 
     <link name="chassis">
         <visual>
-            <origin xyz="0.10125 0 0.0185"/>
+            <origin xyz="0.10125 0 0.010"/>
             <geometry>
                 <mesh filename="package://tankbot/meshes/chassis.stl"/>
             </geometry>
             <material name="brown"/>
         </visual>
         <collision>
-            <origin xyz="0.1015 0 0.055"/>
+            <origin xyz="0.1015 0 0.05"/>
             <geometry>
                 <box size="0.215 0.201 0.10" />
             </geometry>
@@ -59,7 +59,7 @@
     <joint name="left_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel"/>
-        <origin xyz="0 0.105 0.0525" rpy="-${pi/2} 0 0"/>
+        <origin xyz="0 0.1105 0.044" rpy="-${pi/2} 0 0"/>
         <axis xyz="0 0 1"/>
     </joint>
 
@@ -71,7 +71,6 @@
             <material name="white"/>
         </visual>
         <collision>
-            <origin xyz="0 0.0 0.005"/>
             <geometry>
                 <cylinder radius="0.052" length="0.02"/>
             </geometry>
@@ -88,7 +87,7 @@
     <joint name="right_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_wheel"/>
-        <origin xyz="0 -0.105 0.0525" rpy="${pi/2} 0 0"/>
+        <origin xyz="0 -0.10 0.044" rpy="${pi/2} 0 0"/>
         <axis xyz="0 0 -1"/>
     </joint>
 
@@ -100,7 +99,6 @@
             <material name="white"/>
         </visual>
         <collision>
-            <origin xyz="0 0.0 0.005"/>
             <geometry>
                 <cylinder radius="0.052" length="0.02"/>
             </geometry>
@@ -116,7 +114,7 @@
     <joint name="caster_wheel_joint" type="fixed">
         <parent link="chassis"/>
         <child link="caster_wheel"/>
-        <origin xyz="0.189 0 0.005" />
+        <origin xyz="0.189 0 -0.0025" />
     </joint>
 
     <link name="caster_wheel">
@@ -144,7 +142,7 @@
         <joint name="caster_wheel_back_left_joint" type="fixed">
         <parent link="chassis"/>
         <child link="caster_wheel_back_left"/>
-        <origin xyz="0.0075 0.1337 0.0065" />
+        <origin xyz="0.0075 0.1337 -0.002" />
     </joint>
 
     <link name="caster_wheel_back_left">
@@ -169,10 +167,11 @@
         <mu2 value="0.0001"/>
     </gazebo>
 
+
     <joint name="caster_wheel_back_right_joint" type="fixed">
         <parent link="chassis"/>
         <child link="caster_wheel_back_right"/>
-        <origin xyz="0.0075 -0.1337 0.0065" />
+        <origin xyz="0.0075 -0.1337 -0.002" />
     </joint>
 
     <link name="caster_wheel_back_right">
