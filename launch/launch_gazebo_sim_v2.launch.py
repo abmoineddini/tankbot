@@ -11,9 +11,9 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     gazebo_models_path = 'models'
     package_name = 'tankbot'
-    robot_name_in_model = 'tankbot_robot'
+    robot_name_in_model = 'tankbot'
     rviz_config_file_path = 'config/view_tank_rviz.rviz'
-    urdf_file_path = 'description/model.urdf'
+    urdf_file_path = 'description/tankbot.urdf'
     world_file_path = 'world/empty.world'
 
     # Pose where we want to spawn the robot
