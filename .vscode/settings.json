@@ -1,0 +1,12 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/amirbahador/Documents/tank_ws/build/ultrasound_mapping",
+        "/home/amirbahador/Documents/tank_ws/install/ultrasound_mapping/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/amirbahador/Documents/tank_ws/build/ultrasound_mapping",
+        "/home/amirbahador/Documents/tank_ws/install/ultrasound_mapping/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
+}
