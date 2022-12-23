@@ -4,19 +4,19 @@
     <joint name="laser_joint" type="fixed">
         <parent link="chassis"/>
         <child link="laser_frame"/>
-        <origin xyz="0.035 0 0.135" rpy="0 0 0"/>
+        <origin xyz="0.035 0 0.165" rpy="0 0 0"/>
     </joint>
 
     <link name="laser_frame">
         <visual>
-            <origin xyz="0.066 0 -0.125"/>
+            <origin xyz="0.066 0 -0.155"/>
             <geometry>
                 <mesh filename="package://tankbot/meshes/lidar.STL"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
-            <origin xyz="0.035 0 0.0225"/>
+            <origin xyz="0 0 -0.03"/>
             <geometry>
                 <cylinder radius ="0.035" length="0.055" />
             </geometry>
@@ -25,5 +25,35 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
+
+    <gazebo reference="laser_frame">
+        <material>Gazebo/Black</material>
+
+        <sensor name="laser" type="ray">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>
+                </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <argument>~/out:=scan</argument>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>laser_frame</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
 
 </robot>

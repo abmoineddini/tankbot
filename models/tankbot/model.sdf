@@ -2,15 +2,15 @@
   <model name='tankbot'>
     <link name='base_link'>
       <inertial>
-        <pose>-0.08992 0 0.012848 0 -0 0</pose>
-        <mass>1.134</mass>
+        <pose>-0.09324 0 0.013528 0 -0 0</pose>
+        <mass>1.114</mass>
         <inertia>
-          <ixx>0.00744449</ixx>
-          <ixy>1.0929e-21</ixy>
-          <ixz>0.00392327</ixz>
-          <iyy>0.0287892</iyy>
-          <iyz>1.18126e-21</iyz>
-          <izz>0.029577</izz>
+          <ixx>0.00796325</ixx>
+          <ixy>0</ixy>
+          <ixz>0.00416478</ixz>
+          <iyy>0.0286118</iyy>
+          <iyz>0</iyz>
+          <izz>0.0288767</izz>
         </inertia>
       </inertial>
       <collision name='base_link_fixed_joint_lump__chassis_collision'>
@@ -30,12 +30,20 @@
         </surface>
       </collision>
       <collision name='base_link_fixed_joint_lump__camera_frame_collision_1'>
-        <pose>0.29 0 0.19 0 -0 0</pose>
+        <pose>0.09 0 0.095 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.035 0.035 0.035</size>
           </box>
         </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
       </collision>
       <collision name='base_link_fixed_joint_lump__caster_wheel_back_left_collision_2'>
         <pose>-0.0925 0.1337 -0.002 0 -0 0</pose>
@@ -95,20 +103,28 @@
         </surface>
       </collision>
       <collision name='base_link_fixed_joint_lump__laser_frame_collision_5'>
-        <pose>-0.03 0 0.1575 0 -0 0</pose>
+        <pose>-0.065 0 0.135 0 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.055</length>
             <radius>0.035</radius>
           </cylinder>
         </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
       </collision>
       <visual name='base_link_fixed_joint_lump__chassis_visual'>
         <pose>0.00125 0 0.01 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://meshes/chassis.dae</uri>
+            <uri>model://tankbot/meshes/chassis.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -123,9 +139,15 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://meshes/camera.dae</uri>
+            <uri>model://tankbot/meshes/camera.STL</uri>
           </mesh>
         </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
       </visual>
       <visual name='base_link_fixed_joint_lump__caster_wheel_back_left_visual_2'>
         <pose>-0.0925 0.1337 -0.002 0 -0 0</pose>
@@ -174,10 +196,62 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://meshes/lidar.dae</uri>
+            <uri>model://tankbot/meshes/lidar.STL</uri>
           </mesh>
         </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
       </visual>
+      <sensor name='camera' type='camera'>
+        <visualize>1</visualize>
+        <update_rate>10</update_rate>
+        <camera>
+          <horizontal_fov>1.089</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8</far>
+          </clip>
+        </camera>
+        <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
+          <frame_name>camera_optical_link</frame_name>
+        </plugin>
+        <pose>0.095 0 0.095 0 -0 0</pose>
+      </sensor>
+      <sensor name='laser' type='ray'>
+        <visualize>1</visualize>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <min_angle>-3.14</min_angle>
+              <max_angle>3.14</max_angle>
+              <resolution>1</resolution>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>12</max>
+          </range>
+        </ray>
+        <plugin name='laser_controller' filename='libgazebo_ros_ray_sensor.so'>
+          <ros>
+            <argument>~/out:=scan</argument>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>laser_frame</frame_name>
+        </plugin>
+        <pose>-0.065 0 0.165 0 -0 0</pose>
+      </sensor>
     </link>
     <joint name='left_wheel_joint' type='revolute'>
       <pose relative_to='base_link'>0 0.105 0.044 -1.5708 0 0</pose>
@@ -231,7 +305,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://meshes/left_wheel_link.dae</uri>
+            <uri>model://tankbot/meshes/left_wheel_link.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -294,7 +368,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://meshes/right_wheel_link.dae</uri>
+            <uri>model://tankbot/meshes/right_wheel_link.stl</uri>
           </mesh>
         </geometry>
         <material>
