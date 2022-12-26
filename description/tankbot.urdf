@@ -332,3 +332,5 @@
     </sensor>
   </gazebo>
 </robot>
+<!-- xacro robot.urdf.xacro > tankbot.urdf -->
+<!-- gz sdf -p tankbot.urdf > model.sdf -->

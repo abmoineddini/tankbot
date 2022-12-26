@@ -6,3 +6,6 @@
     <xacro:include filename="lidar.xacro"/>
     <xacro:include filename="camera.xacro"/>
 </robot>
+
+<!-- xacro robot.urdf.xacro > tankbot.urdf -->
+<!-- gz sdf -p tankbot.urdf > model.sdf -->

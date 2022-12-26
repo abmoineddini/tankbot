@@ -146,6 +146,18 @@ def generate_launch_description():
                     '-Y', spawn_yaw_val],
                     output='screen')
 
+    # ros2 control argument diff drive
+    spawn_diff_cont_cmd = Node(
+    package='controller_manager', 
+    executable='spawner.py',
+    arguments=["diff_cont"])
+
+    # ros2 control argument joint broad
+    spawn_joint_broad_cmd = Node(
+    package='controller_manager', 
+    executable='spawner.py',
+    arguments=["joint_broad"])     
+
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -169,6 +181,11 @@ def generate_launch_description():
     ld.add_action(start_robot_state_publisher_cmd)
     ld.add_action(start_joint_state_publisher_cmd)
     ld.add_action(start_rviz_cmd)
+    ld.add_action(spawn_diff_cont_cmd)
+    ld.add_action(spawn_joint_broad_cmd)
 
 
     return ld
+
+# mapped Teleop command
+# ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
