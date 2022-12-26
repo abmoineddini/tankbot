@@ -194,22 +194,34 @@
     <mu1 value="0.0001"/>
     <mu2 value="0.0001"/>
   </gazebo>
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="left_wheel_joint">
+      <!-- command interface for left joint -->
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="min">10</param>
+      </command_interface>
+      <!-- state interfaces for left joint -->
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+    <joint name="right_wheel_joint">
+      <!-- command interface for right joint -->
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="min">10</param>
+      </command_interface>
+      <!-- state interfaces for right joint -->
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+  </ros2_control>
   <gazebo>
-    <plugin filename="libgazebo_ros_diff_drive.so" name="diff_drive">
-      <!-- Wheel Information -->
-      <left_joint>left_wheel_joint</left_joint>
-      <right_joint>right_wheel_joint</right_joint>
-      <wheel_separation>0.21</wheel_separation>
-      <wheel_diameter>0.104</wheel_diameter>
-      <!-- Limits -->
-      <max_wheel_torque>200</max_wheel_torque>
-      <max_wheel_acceleration>10.0</max_wheel_acceleration>
-      <!-- Output -->
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_link</robot_base_frame>
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <publish_wheel_tf>true</publish_wheel_tf>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>/home/amirbahador/Documents/tank_ws/install/tankbot/share/tankbot/config/gazebo_controller_tankbot.yaml</parameters>
     </plugin>
   </gazebo>
   <joint name="laser_joint" type="fixed">
