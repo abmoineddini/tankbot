@@ -14,7 +14,7 @@ def generate_launch_description():
     robot_name_in_model = 'tankbot'
     rviz_config_file_path = 'config/view_tank_rviz.rviz'
     urdf_file_path = 'description/tankbot.urdf'
-    world_file_path = 'world/empty.world'
+    world_file_path = 'worlds/custom.world'
 
     # Pose where we want to spawn the robot
     spawn_x_val = '0.0'
