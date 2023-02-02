@@ -180,10 +180,9 @@ def generate_launch_description():
     ld.add_action(spawn_entity_cmd)
     ld.add_action(start_robot_state_publisher_cmd)
     ld.add_action(start_joint_state_publisher_cmd)
-    ld.add_action(start_rviz_cmd)
     ld.add_action(spawn_diff_cont_cmd)
     ld.add_action(spawn_joint_broad_cmd)
-
+    ld.add_action(start_rviz_cmd)
 
     return ld
 
