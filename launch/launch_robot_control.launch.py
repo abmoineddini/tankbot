@@ -96,6 +96,16 @@ def generate_launch_description():
     package='rplidar_ros', 
     executable='rplidar_composition')
 
+    # Start Camera
+    start_camera_cmd = Node(
+    package='v4l2_camera', 
+    executable='v4l2_camera_node',
+    output = 'screen',
+    parameters=[{
+        'image_size' : [640, 480],
+        'camera_frame_id' : 'camera_link_optical'
+    }])
+
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -113,6 +123,7 @@ def generate_launch_description():
     ld.add_action(delayed_spawn_diff_cont_cmd)
     ld.add_action(delayed_spawn_joint_broad_cmd)
     ld.add_action(start_lidar_cmd)
+    ld.add_action(start_camera_cmd)
 
     return ld
 
