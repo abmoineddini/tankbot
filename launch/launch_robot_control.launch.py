@@ -91,6 +91,11 @@ def generate_launch_description():
                                                         target_action=controller_manager_cmd, 
                                                         on_start=spawn_joint_broad_cmd))
 
+    # ros2 lidar start
+    start_lidar_cmd = Node(
+    package='rplidar_ros', 
+    executable='rplidar_composition')
+
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -100,13 +105,14 @@ def generate_launch_description():
     ld.add_action(declare_use_namespace_cmd)
     ld.add_action(declare_urdf_model_path_cmd)
     ld.add_action(declare_use_robot_state_pub_cmd)  
-
+    
     # Add any actions
     ld.add_action(start_robot_state_publisher_cmd)
     ld.add_action(start_joint_state_publisher_cmd)
     ld.add_action(delayed_controller_manager_cmd)
     ld.add_action(delayed_spawn_diff_cont_cmd)
     ld.add_action(delayed_spawn_joint_broad_cmd)
+    ld.add_action(start_lidar_cmd)
 
     return ld
 
