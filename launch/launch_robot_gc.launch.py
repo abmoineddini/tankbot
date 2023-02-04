@@ -74,20 +74,6 @@ def generate_launch_description():
         default_value='True',
         description='Whether to start RVIZ')
 
-
-    # Subscribe to the joint states of the robot, and publish the 3D pose of each link.    
-    # start_robot_state_publisher_cmd = Node(
-    # package='robot_state_publisher',
-    # executable='robot_state_publisher',
-    # parameters=[{'robot_description': Command(['xacro ', urdf_model])}])
-
-    # # Publish the joint states of the robot
-    # start_joint_state_publisher_cmd = Node(
-    # package='joint_state_publisher',
-    # executable='joint_state_publisher',
-    # name='joint_state_publisher',
-    # condition=UnlessCondition(gui))
-
     # Launch RViz
     start_rviz_cmd = Node(
     package='rviz2',
@@ -96,9 +82,11 @@ def generate_launch_description():
     output='screen',
     arguments=['-d', rviz_config_file])
 
-    # delayed_start_gazebo_cmd = RegisterEventHandler(event_handler=OnProcessStart(
-    #                                                     target_action=controller_manager_cmd, 
-    #                                                     on_start=spawn_joint_broad_cmd))
+    # Starting rqt image viewer
+    start_rviz_cmd = Node(
+    package='rqt_image_view',
+    executable='rqt_image_view ')
+
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -115,8 +103,6 @@ def generate_launch_description():
  
 
     # Add any actions
-    # ld.add_action(start_robot_state_publisher_cmd)
-    # ld.add_action(start_joint_state_publisher_cmd)
     ld.add_action(start_rviz_cmd)
 
     return ld
