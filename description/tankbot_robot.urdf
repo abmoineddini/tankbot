@@ -258,34 +258,6 @@
       <inertia ixx="5.6746666666666656e-05" ixy="0.0" ixz="0.0" iyy="5.6746666666666656e-05" iyz="0.0" izz="0.00010816"/>
     </inertial>
   </link>
-  <gazebo reference="laser_frame">
-    <material>Gazebo/Black</material>
-    <sensor name="laser" type="ray">
-      <pose> 0 0 0 0 0 0 </pose>
-      <visualize>true</visualize>
-      <update_rate>10</update_rate>
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>360</samples>
-            <min_angle>-3.14</min_angle>
-            <max_angle>3.14</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.3</min>
-          <max>12</max>
-        </range>
-      </ray>
-      <plugin filename="libgazebo_ros_ray_sensor.so" name="laser_controller">
-        <ros>
-          <argument>~/out:=scan</argument>
-        </ros>
-        <output_type>sensor_msgs/LaserScan</output_type>
-        <frame_name>laser_frame</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
   <joint name="camera_joint" type="fixed">
     <parent link="chassis"/>
     <child link="camera_frame"/>
@@ -317,29 +289,6 @@
     <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.0125"/>
   </joint>
   <link name="camera_optical_link"/>
-  <gazebo reference="camera_frame">
-    <material>Gazebo/White</material>
-    <sensor name="camera" type="camera">
-      <pose> 0 0 0 0 0 0 </pose>
-      <visualize>true</visualize>
-      <update_rate>10</update_rate>
-      <camera>
-        <horizontal_fov>1.089</horizontal_fov>
-        <image>
-          <format>R8G8B8</format>
-          <width>640</width>
-          <height>480</height>
-        </image>
-        <clip>
-          <near>0.05</near>
-          <far>8.0</far>
-        </clip>
-      </camera>
-      <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
-        <frame_name>camera_optical_link</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
 </robot>
 <!-- xacro robot.urdf.xacro > tankbot.urdf -->
 <!-- gz sdf -p tankbot.urdf > model.sdf -->
