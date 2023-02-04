@@ -94,7 +94,12 @@ def generate_launch_description():
     # ros2 lidar start
     start_lidar_cmd = Node(
     package='rplidar_ros', 
-    executable='rplidar_composition')
+    executable='rplidar_composition',
+    parameters=[{
+        'frame_id': 'laser_frame',
+        'angle_compensate': True,
+        'scan_mode': 'Standard'
+    }])
 
     # Start Camera
     start_camera_cmd = Node(
