@@ -83,9 +83,9 @@ def generate_launch_description():
     arguments=['-d', rviz_config_file])
 
     # Starting rqt image viewer
-    start_rviz_cmd = Node(
+    start_rqt_image_cmd = Node(
     package='rqt_image_view',
-    executable='rqt_image_view ')
+    executable='rqt_image_view')
 
 
     # Create the launch description and populate
@@ -104,6 +104,7 @@ def generate_launch_description():
 
     # Add any actions
     ld.add_action(start_rviz_cmd)
+    ld.add_action(start_rqt_image_cmd)
 
     return ld
 
